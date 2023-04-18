@@ -9,6 +9,9 @@ public class SceneAwake : MonoBehaviour
     int createdCartListNum = 0;
     int remainedCartNum = 134;
 
+    string completedCartType = "";
+    int cartTypeArrayNum = 0;
+
     GameObject[] createdCartList = new GameObject[134];
     string[] cartTypeArray = new string[]
     {
@@ -86,7 +89,7 @@ public class SceneAwake : MonoBehaviour
     {
         Debug.Log(remainedCartNum);
 
-        if (remainedCartNum <= 60)
+        if (remainedCartNum < 60)
         {
             CartChanger();
             yield break;
@@ -115,11 +118,9 @@ public class SceneAwake : MonoBehaviour
         {
             if(cart != null)
             {
-                string completedCartType = "";
-                int cartTypeArrayNum;
                 Debug.Log("is not null");
 
-                do
+/*                do
                 {
                     cartTypeArrayNum = Random.Range(0, 60);
                     Debug.Log(cartTypeArrayNum);
@@ -131,7 +132,20 @@ public class SceneAwake : MonoBehaviour
                         cartTypeArray[cartTypeArrayNum] = null;
                     }
 
-                } while (completedCartType != cartTypeArray[cartTypeArrayNum]);
+                } while (completedCartType != cartTypeArray[cartTypeArrayNum]);*/
+
+                while (completedCartType != cartTypeArray[cartTypeArrayNum])
+                {
+                    cartTypeArrayNum = Random.Range(0, 60);
+                    Debug.Log(cartTypeArray[cartTypeArrayNum]);
+
+                    if (cartTypeArray[cartTypeArrayNum] != null)
+                    {
+                        Debug.Log("search complete");
+                        completedCartType = cartTypeArray[cartTypeArrayNum];
+                        cartTypeArray[cartTypeArrayNum] = null;
+                    }
+                }
 
                 Debug.Log("get");
                 cart.GetComponent<Cart>().cartType = completedCartType;
